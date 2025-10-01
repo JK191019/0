@@ -3,3 +3,22 @@ Dear Team,
 For the Auto cancelation revamp development to complite needed some changes in GAPI.jar  (this.funcShortName.equals("autocan")  this is old auto cancelation function short name so now revamp function short name is need to add so kindly add and push the jar in 87 Region the I will test the scenarios
 
 Note: Revamp Function ShortName -  autocanTF
+
+
+Subject: Request for GAPI.jar Update for Auto Cancellation Revamp
+
+Dear Team,
+
+For the Auto Cancellation Revamp development to be completed, we require a small update in GAPI.jar.
+
+Currently, the function short name is being checked as:
+
+
+This corresponds to the old Auto Cancellation function. As part of the revamp, a new function short name needs to be added.
+
+Revamp Function ShortName: autocanTF
+
+Requesting you to kindly update the jar with the new function short name and push it to Region 87. Once done, I will proceed with scenario testing.
+
+Thanks & Regards,
+[Your Name]
