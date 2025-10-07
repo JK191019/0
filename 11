@@ -11,3 +11,28 @@ var APPL_ID = DV.getFieldValue("C_MAIN_REF");
 		 var CHG_FLD_LOCAL_CUST_AC_NO1 = DV.updateField("CHG_FLD_LOCAL_CUST_AC_NO", catagory1);
 
 		DV.writeLog("CHG_FLD_LOCAL_CUST_AC_NO1: " + CHG_FLD_LOCAL_CUST_AC_NO1);
+
+
+
+// 1️⃣ Get the Application ID
+var APPL_ID = DV.getFieldValue("C_MAIN_REF");
+DV.writeLog("C_MAIN_REF: " + APPL_ID);
+
+// 2️⃣ Prepare field list and SQL condition
+var fieldList = DV.addFieldList(null, "OPERA_ACC_NO");
+var sqlCond = DV.addSQLCondition(null, "C_MAIN_REF", APPL_ID);
+
+// 3️⃣ Execute query on FWCO_MASTER table
+var result = DV.executeQuery("EXIMTRX.FWCO_MASTER", fieldList, sqlCond);
+
+// 4️⃣ Get the OPERA_ACC_NO value from the result
+var operaAccNo = DV.getDBFieldValue(result, "OPERA_ACC_NO");
+DV.writeLog("OPERA_ACC_NO_GET_TABLE_VALUE: " + operaAccNo);
+
+// 5️⃣ Update field only if value exists
+if (operaAccNo != null && operaAccNo !== "") {
+    var updateResult = DV.updateField("CHG_FLD_LOCAL_CUST_AC_NO", operaAccNo);
+    DV.writeLog("CHG_FLD_LOCAL_CUST_AC_NO (after update): " + updateResult);
+} else {
+    DV.writeLog("OPERA_ACC_NO is NULL or empty — skipping update.");
+}
