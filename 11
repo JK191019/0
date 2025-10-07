@@ -89,3 +89,51 @@ if (!DV.getFieldValue(TARGET)) {
     DV.writeLog("setFieldValue -> " + r2 + " | readback: " + DV.getFieldValue(TARGET));
   }
 }
+
+
+
+// 1) Get key + query
+var APPL_ID = DV.getFieldValue("C_MAIN_REF");
+var rs = DV.executeQuery(
+  "EXIMTRX.FWCO_MASTER",
+  DV.addFieldList(null, "OPERA_ACC_NO"),
+  DV.addSQLCondition(null, "C_MAIN_REF", APPL_ID)
+);
+
+// 2) Grab raw value (handle array/object/XML/CDATA) without functions
+var raw = DV.getDBFieldValue(rs, "OPERA_ACC_NO");
+var val = raw;
+
+// if it's an array, take first
+if (Array.isArray(val)) val = val[0];
+
+// try common object props if it's an object node
+if (val && typeof val === "object") {
+  if ("text" in val) val = val.text;
+  else if ("value" in val) val = val.value;
+  else if ("textContent" in val) val = val.textContent;
+}
+
+// force string, strip CDATA + tags, trim, keep digits only
+val = String(val)
+  .replace(/<!\[CDATA\[(.*?)\]\]>/, "$1")
+  .replace(/<[^>]+>/g, "")
+  .trim()
+  .replace(/\D/g, "");
+
+DV.writeLog("OPERA_ACC_NO_CLEAN: " + val);
+
+// 3) Try to set the field (header field)
+var TARGET = "CHG_FLD_LOCAL_CUST_AC_NO";
+var r1 = DV.updateField(TARGET, val);
+DV.writeLog("updateField -> " + r1 + " | readback: " + DV.getFieldValue(TARGET));
+
+// 4) Fallback setter if readback is still empty
+var rb = DV.getFieldValue(TARGET);
+if (rb == null || String(rb).trim() === "") {
+  if (DV.setFieldValue) {
+    var r2 = DV.setFieldValue(TARGET, val);
+    DV.writeLog("setFieldValue -> " + r2 + " | readback: " + DV.getFieldValue(TARGET));
+  }
+}
+
