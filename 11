@@ -35,4 +35,57 @@ if (operaAccNo != null && operaAccNo !== "") {
     DV.writeLog("CHG_FLD_LOCAL_CUST_AC_NO (after update): " + updateResult);
 } else {
     DV.writeLog("OPERA_ACC_NO is NULL or empty — skipping update.");
+
+
+
+
+// Get value
+var rs = DV.executeQuery("EXIMTRX.FWCO_MASTER", DV.addFieldList(null, "OPERA_ACC_NO"),
+                         DV.addSQLCondition(null, "C_MAIN_REF", DV.getFieldValue("C_MAIN_REF")));
+var raw = DV.getDBFieldValue(rs, "OPERA_ACC_NO");
+
+// Normalize anything -> clean string (handles array, object/node, XML, CDATA)
+function asText(v) {
+  if (v == null) return "";
+  // If array, take first
+  if (Array.isArray(v)) v = v[0];
+
+  // If object (DOM node / custom), try common text holders
+  if (typeof v === "object") {
+    if ("text" in v) v = v.text;
+    else if ("value" in v) v = v.value;
+    else if ("textContent" in v) v = v.textContent;
+    else v = String(v);
+  }
+
+  v = String(v);
+
+  // If wrapped in CDATA: <![CDATA[ ... ]]>
+  v = v.replace(/^<!\[CDATA\[(.*)\]\]>$/s, "$1");
+
+  // If still has XML tags, strip them
+  v = v.replace(/<[^>]+>/g, "");
+
+  return v.trim();
+}
+
+var operaAccNo = asText(raw);
+
+// If it must be digits only (common for account nos)
+var operaAccNoDigits = operaAccNo.replace(/\D/g, "");
+
+DV.writeLog("RAW_OPERA_ACC_NO: " + raw);
+DV.writeLog("NORMALIZED_OPERA_ACC_NO: " + operaAccNo);
+DV.writeLog("DIGITS_ONLY_OPERA_ACC_NO: " + operaAccNoDigits);
+
+// Update UI (try both setters; some screens prefer one)
+var TARGET = "CHG_FLD_LOCAL_CUST_AC_NO";
+var r1 = DV.updateField(TARGET, operaAccNoDigits);
+DV.writeLog("updateField -> " + r1 + " | readback: " + DV.getFieldValue(TARGET));
+
+if (!DV.getFieldValue(TARGET)) {
+  if (DV.setFieldValue) {
+    var r2 = DV.setFieldValue(TARGET, operaAccNoDigits);
+    DV.writeLog("setFieldValue -> " + r2 + " | readback: " + DV.getFieldValue(TARGET));
+  }
 }
