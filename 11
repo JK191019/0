@@ -1,1 +1,51 @@
+// 1) Get key + query
+var APPL_ID = DV.getFieldValue("C_MAIN_REF");
+DV.writeLog("C_MAIN_REF: " + APPL_ID);
 
+var rs = DV.executeQuery(
+  "EXIMTRX.FWCO_MASTER",
+  DV.addFieldList(null, "OPERA_ACC_NO"),
+  DV.addSQLCondition(null, "C_MAIN_REF", APPL_ID)
+);
+
+// 2) Coerce whatever we got to a string (works for array/object/xml nodes in this engine)
+var raw = DV.getDBFieldValue(rs, "OPERA_ACC_NO");
+var s = "" + raw; // toString without calling a function explicitly
+DV.writeLog("RAW_OPERA_ACC_NO: " + s);
+
+// 3) Remove CDATA wrappers without regex/functions
+//    Replace "<![CDATA[" and "]]>" by splitting and joining
+var parts1 = s.split("<![CDATA[");
+if (parts1.length > 1) s = parts1.join("");
+var parts2 = s.split("]]>");
+if (parts2.length > 1) s = parts2.join("");
+
+// 4) Strip any XML tags: remove substrings between '<' and '>'
+var start = s.indexOf("<");
+while (start >= 0) {
+  var end = s.indexOf(">", start);
+  if (end < 0) break;
+  s = s.substring(0, start) + s.substring(end + 1);
+  start = s.indexOf("<");
+}
+
+// 5) Keep digits only (avoid regex)
+var clean = "";
+var i = 0;
+while (i < s.length) {
+  var ch = s.charAt(i);
+  if (ch >= "0" && ch <= "9") {
+    clean = clean + ch;
+  }
+  i = i + 1;
+}
+DV.writeLog("CLEAN_OPERA_ACC_NO: " + clean);
+
+// 6) Update the field (header field)
+var TARGET = "CHG_FLD_LOCAL_CUST_AC_NO";
+var r1 = DV.updateField(TARGET, clean);
+DV.writeLog("updateField -> " + r1 + " | readback: " + DV.getFieldValue(TARGET));
+
+// 7) If still null/empty, the field is likely in a grid/child block — uncomment and set correctly:
+// DV.updateBlockField("CHARGES_BLOCK", 0, TARGET, clean);
+// DV.writeLog("Block update readback: " + DV.getBlockFieldValue("CHARGES_BLOCK", 0, TARGET));
