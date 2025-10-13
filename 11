@@ -269,3 +269,19 @@ Notes / assumptions
 	•	Run as a user with UPDATE rights on EXIMTRX.FWCO_MASTER.
 
 If you want, I can also give you a version that only prints what would be updated (no actual updates) for a dry-run.
+
+
+-- Upsert 10-Oct-2025 into holiday table as a working day ('W')
+merge into eximsys.std_holiday b
+using (
+  select to_char(trunc(sysdate)-3,'YYYY') as y,
+         to_char(trunc(sysdate)-3,'MM')   as m,
+         to_char(trunc(sysdate)-3,'DD')   as d
+  from dual
+) s
+on (b.c_year = s.y and b.c_month = s.m and b.c_date = s.d)
+when not matched then
+  insert (c_year, c_month, c_date, c_type)
+  values (s.y, s.m, s.d, 'W');
+
+commit;
