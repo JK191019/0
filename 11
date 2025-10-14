@@ -1,7 +1,7 @@
 Dear Suresh,
 
-The KP ans KS transaction  is done old functions in revamp is not booked evan one taranscation till now and the so and property file also I can se the autocan I funcstion shaort name is old so in the name is call two please that plsae is narmal cansilation so i dont kown the auro cancel cross currenacy get the values from mercury kindly cahek and
+The KP and KS transaction is booked old functions and revamp functions is not booked evan one taranscation till now  i dont way and we have to check the property file because the old funcstion short name is called only two pleases it show be foure palase that sems the auto cancelation normal is called but auto cancelation cross currenacy is not called i dont kown how to get the values from mercury kindly check property file
 
 Note:
 1.sql.sh files for auto normal and auto cross cancelation for revamp we need to add revamp function short name -  Sub_CE_15TF
-2.The Old Task xml need be change because old auto cansilation bach is piking all the trsaction old tarasactions and new taractions its pik old tracastions so I am adding the revamp function will not pik so i wll add the conidiation
+2.The Old Task xml need be change because old auto cancelation beach is pik all the trsaction old tarasactions and new taractions its pik old tracastions only because i developed new auto cancelation beach this pik revamp functions so I am adding the revamp function will not pik in old auto cancelation baceh so i wll add the conidiation in the task xml.
