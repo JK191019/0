@@ -1,29 +1,4 @@
-Dear Suresh,
 
-The KP and KS transaction is booked old functions and revamp functions is not booked evan one taranscation till now  i dont way and we have to check the property file because the old funcstion short name is called only two pleases it show be foure palase that sems the auto cancelation normal is called but auto cancelation cross currenacy is not called i dont kown how to get the values from mercury kindly check property file
+Dear sir,
 
-Note:
-1.sql.sh files for auto normal and auto cross cancelation for revamp we need to add revamp function short name -  Sub_CE_15TF
-2.The Old Task xml need be change because old auto cancelation beach is pik all the trsaction old tarasactions and new taractions its pik old tracastions only because i developed new auto cancelation beach this pik revamp functions so I am adding the revamp function will not pik in old auto cancelation baceh so i wll add the conidiation in the task xml.
-
-Note: I given the tarasaction list in below  for KP and KS what is bookind in 2025 kindly check.
-
-
-
-
-Subject: Verification Required for KP and KS Transactions – Auto Cancellation (Revamp)
-
-Dear Suresh,
-
-The KP and KS transactions are currently being booked using the old functions, while revamp functions are not booking any transactions so far. I’m not sure why this is happening.
-
-Please check the property file, as the old function short name appears in only two places, but it should ideally appear in four places. It seems that the Auto Cancellation (Normal) function is being called, but the Auto Cancellation (Cross Currency) function is not getting triggered. I suspect that the issue might be related to how values are being fetched from Mercury — kindly verify this in the property file.
-
-Notes:
-	1.	In the sql.sh files for both Auto Normal and Auto Cross Cancellation (Revamp), we need to add the revamp function short name – Sub_CE_15TF.
-	2.	The old task XML needs to be updated because the existing Auto Cancellation batch is picking up both old and new transactions. However, it should only pick old transactions.
-	•	I have developed a new Auto Cancellation batch that will pick only revamp functions.
-	•	Hence, I will add a condition in the task XML to ensure that revamp functions are not picked by the old batch.
-
-Note:
-I have attached the list of transactions booked in 2025 for KP and KS for your reference. Kindly review and confirm.
+The Capabilty matrics validation is done in 87 Region kindly arraange for the testing
