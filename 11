@@ -3,3 +3,15 @@ Dear Team,
 The Issue is thea auto bache select quriye is not exuquting when we are run manulaval are auto baches is fasing this issuen
 
 Note: The DB update quries is pending some systems evary day close the db and repon then only we mitigate the is issue other wise we have to send a mile to GAPI team evary time.
+
+
+
+
+Dear Team,
+
+Please note that the auto batch select query is not executing properly when we run it manually or through the scheduled auto batches.
+
+Note:
+The DB update queries are still pending on some systems. Every day, the issue gets resolved only after closing and reopening the database. Otherwise, we need to send a mail to the GAPI team each time to proceed.
+
+This is just to inform everyone about the current situation and the reason for the issue.
