@@ -1,13 +1,3 @@
-Dear Team, 
-
-The Courier development in that one filed value is coming null this value we are using the in-courier table filed is COUR_DISPATCH so this filed value is coming null in production which functions Ill giving the function short names check and close the defect
-
-
-
-Subject: Courier Development – COUR_DISPATCH Field Value Coming as Null
-
 Dear Team,
 
-The Courier Development module has an issue where the field value is coming as null. This value is being used in the In-Courier table under the field COUR_DISPATCH.
-
-Please check the related functions (I will provide the function short names) and help analyze and close the defect at the earliest.
+For INLC E-trade functions is separate INLC issue and INLC Amendment so develop the courier functionality we are alerady deleoped in register funactions so its easy chack and function do as its  and do as ASAP 
