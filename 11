@@ -1,57 +1,28 @@
-[start] [ERROR] [2025-11-15 14:03:05.689] [6393312] Thread ID:18927 >> Swift being attached...! [end]
-
-[start] [DEBUG] [2025-11-15 14:03:05.691] [6393312] com.cs.eximap.ejb.business.swift.SwiftMerge.getData(SwiftMerge.java:114) >> Approve SWIFT TRX_REF:0999525FP0B01094 EVT:1 [end]
-
-[start] [ERROR] [2025-11-15 14:03:05.717] [6393312] ---------------------Begin 2025-11-15 14:03:05 717 --------------------- 
-System Err Log: Thread ID:18927 >> java.lang.NumberFormatException
- at java.math.BigDecimal.<init>(BigDecimal.java:501)
- at java.math.BigDecimal.<init>(BigDecimal.java:387)
- at java.math.BigDecimal.<init>(BigDecimal.java:813)
- at com.cs.eximap.ejb.business.swift.SwiftMerge.getValue(SwiftMerge.java:1081)
- at com.cs.eximap.ejb.business.swift.SwiftMerge.parserSwift(SwiftMerge.java:345)
- at com.cs.eximap.ejb.business.swift.SwiftMerge.getData(SwiftMerge.java:176)
- at com.cs.eximap.ejb.business.swift.ParserParameters.getMergeSwift(ParserParameters.java:370)
- at com.cs.eximap.ejb.business.swift.ParserParameters.parseSingleSwift(ParserParameters.java:1263)
- at com.cs.eximap.ejb.business.swift.ParserParameters.parseSingleSwift(ParserParameters.java:1207)
- at com.cs.eximap.ejb.business.swift.ParserParameters.getData(ParserParameters.java:242)
- at com.cs.eximap.ejb.business.swift.ASESwiftManagerBean.getDataPending(ASESwiftManagerBean.java:64)
- at com.cs.eximap.busiintf.TrxGenerateSwift.getDataPending(TrxGenerateSwift.java:25)
- at com.cs.eximap.esbqueue.ESBQueueUtil.runService(ESBQueueUtil.java:516)
- at com.cs.eximap.esbqueue.ESBQueueUtil.dealService(ESBQueueUtil.java:489)
- at com.cs.eximap.esbqueue.ESBQueueUtil.processSwiftComponent(ESBQueueUtil.java:703)
- at com.cs.eximap.esbqueue.ESBQueueUtil.runService(ESBQueueUtil.java:359)
- at com.cs.eximap.miscintf.PreViewOutputFactory.getData(PreViewOutputFactory.java:122)
- at com.cs.eximap.ejb.comm.RMICommunicatorProcess.getData(RMICommunicatorProcess.java:225)
- at com.cs.eximssweb.servlet.WSSHttpsAPServlet.performTask(WSSHttpsAPServlet.java:75)
- at com.cs.eximssweb.servlet.WSSHttpsAPServlet.doPost(WSSHttpsAPServlet.java:42)
- at javax.servlet.http.HttpServlet.service(HttpServlet.java:707)
- at javax.servlet.http.HttpServlet.service(HttpServlet.java:790)
- at weblogic.servlet.internal.StubSecurityHelper$ServletServiceAction.run(StubSecurityHelper.java:295)
- at weblogic.servlet.internal.StubSecurityHelper$ServletServiceAction.run(StubSecurityHelper.java:260)
- at weblogic.servlet.internal.StubSecurityHelper.invokeServlet(StubSecurityHelper.java:137)
- at weblogic.servlet.internal.ServletStubImpl.execute(ServletStubImpl.java:353)
- at weblogic.servlet.internal.TailFilter.doFilter(TailFilter.java:25)
- at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:78)
- at com.cs.eximweb.servlets.filter.EEXFrameDenyFilter.doFilter(EEXFrameDenyFilter.java:40)
- at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:78)
- at com.cs.eximweb.sso.servlets.PicketlinkFilter.doFilter(PicketlinkFilter.java:140)
- at weblogic.servlet.internal.FilterChainImpl.doFilter(FilterChainImpl.java:78)
- at weblogic.servlet.internal.WebAppServletContext$ServletInvocationAction.wrapRun(WebAppServletContext.java:3800)
- at weblogic.servlet.internal.WebAppServletContext$ServletInvocationAction.run(WebAppServletContext.java:3766)
- at weblogic.security.acl.internal.AuthenticatedSubject.doAs(AuthenticatedSubject.java:344)
- at weblogic.security.service.SecurityManager.runAsForUserCode(SecurityManager.java:197)
- at weblogic.servlet.provider.WlsSecurityProvider.runAsForUserCode(WlsSecurityProvider.java:203)
- at weblogic.servlet.provider.WlsSubjectHandle.run(WlsSubjectHandle.java:71)
- at weblogic.servlet.internal.WebAppServletContext.doSecuredExecute(WebAppServletContext.java:2454)
- at weblogic.servlet.internal.WebAppServletContext.securedExecute(WebAppServletContext.java:2302)
- at weblogic.servlet.internal.WebAppServletContext.execute(WebAppServletContext.java:2280)
- at weblogic.servlet.internal.ServletRequestImpl.runInternal(ServletRequestImpl.java:1739)
- at weblogic.servlet.internal.ServletRequestImpl.run(ServletRequestImpl.java:1699)
- at weblogic.servlet.provider.ContainerSupportProviderImpl$WlsRequestExecutor.run(ContainerSupportProviderImpl.java:272)
- at weblogic.invocation.ComponentInvocationContextManager._runAs(ComponentInvocationContextManager.java:352)
- at weblogic.invocation.ComponentInvocationContextManager.runAs(ComponentInvocationContextManager.java:337)
- at weblogic.work.LivePartitionUtility.doRunWorkUnderContext(LivePartitionUtility.java:57)
- at weblogic.work.PartitionUtility.runWorkUnderContext(PartitionUtility.java:41)
- at weblogic.work.SelfTuningWorkManagerImpl.runWorkUnderContext(SelfTuningWorkManagerImpl.java:655)
- at weblogic.work.ExecuteThread.execute(ExecuteThread.java:420)
- at weblogic.work.ExecuteThread.run(ExecuteThread.java:360)
+ csFuncLevelProto.SYF_FWCO_MT300_GenerateReceivingAgentString = function() {
+    try {
+ 
+       if (document.MAINFORM.CUST_BIC_CODE.value != "") {
+          var CustBICCode = document.MAINFORM.CUST_BIC_CODE.value;
+          var ReceivingAgentString = "";
+          var ChargeAccount = "";
+          if (document.MAINFORM.CHG_FLD_LOCAL_CUST_AC_NO.value != "") {
+             ChargeAccount = document.MAINFORM.CHG_FLD_LOCAL_CUST_AC_NO.value;
+          } else {
+             var id = document.MAINFORM.CUST_ID.value;
+             var br_code = document.MAINFORM.ORGI_BR_CODE.value;
+             var ccy = 'INR';
+             if (document.MAINFORM.CHG_FLD_LOCAL_CUST_AC_NO.value == '') {
+                var default_acc = SYT_Get_customerAccountNumber('C', 1, 10, 100, id, ccy, br_code);
+                ChargeAccount = default_acc;
+             }
+          }
+          if (ChargeAccount != "") {
+             ReceivingAgentString = "/" + ChargeAccount + "\n";
+             ReceivingAgentString += CustBICCode;
+             document.MAINFORM.MT300_RECV_AGENT.value = ReceivingAgentString;
+          }
+       }
+    } catch (e) {
+       DisExcpt("SYF_FWCO_Booking_FC_DEO.js*SYF_FWCO_MT300_GenerateReceivingAgentString", e);
+    }
+ }
