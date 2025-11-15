@@ -7,3 +7,16 @@ Dear Team,
 The GTFC team is currently testing the Export Module for CAP Matrix validation. During testing, they encountered errors while confirming the transactions (please refer to the attached file for details).
 
 They have also requested the RATs (Required Approval Tests) to be provided and to proceed accordingly.
+
+
+function convertDate(dateStr) {
+    // dateStr example: "03-11-2025"
+    const parts = dateStr.split("-");
+    const day = parts[0];
+    const month = parts[1];
+    const year = parts[2].slice(-2); // get last 2 digits
+
+    return `${day}-${month}-${year}`;
+}
+
+console.log(convertDate("03-11-2025")); // output: 03-11-25
