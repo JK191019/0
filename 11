@@ -1,122 +1,28 @@
- csFuncLevelProto.SYF_FWCO_MT300_GenerateReceivingAgentString = function() {
-    try {
- 
-       if (document.MAINFORM.CUST_BIC_CODE.value != "") {
-          var CustBICCode = document.MAINFORM.CUST_BIC_CODE.value;
-          var ReceivingAgentString = "";
-          var ChargeAccount = "";
-          if (document.MAINFORM.CHG_FLD_LOCAL_CUST_AC_NO.value != "") {
-             ChargeAccount = document.MAINFORM.CHG_FLD_LOCAL_CUST_AC_NO.value;
-          } else {
-             var id = document.MAINFORM.CUST_ID.value;
-             var br_code = document.MAINFORM.ORGI_BR_CODE.value;
-             var ccy = 'INR';
-             if (document.MAINFORM.CHG_FLD_LOCAL_CUST_AC_NO.value == '') {
-                var default_acc = SYT_Get_customerAccountNumber('C', 1, 10, 100, id, ccy, br_code);
-                ChargeAccount = default_acc;
-             }
-          }
-          if (ChargeAccount != "") {
-             ReceivingAgentString = "/" + ChargeAccount + "\n";
-             ReceivingAgentString += CustBICCode;
-             document.MAINFORM.MT300_RECV_AGENT.value = ReceivingAgentString;
-          }
-       }
-    } catch (e) {
-       DisExcpt("SYF_FWCO_Booking_FC_DEO.js*SYF_FWCO_MT300_GenerateReceivingAgentString", e);
-    }
- }
-
-
-
 csFuncLevelProto.SYF_FWCO_MT300_GenerateReceivingAgentString = function() {
-  try {
-    if (document.MAINFORM.CUST_BIC_CODE.value != "") {
-      var CustBICCode = document.MAINFORM.CUST_BIC_CODE.value;
-      var ReceivingAgentString = "";
-      var ChargeAccount = "";
+   try {
 
-      if (document.MAINFORM.CHG_FLD_LOCAL_CUST_AC_NO.value != "") {
-        ChargeAccount = document.MAINFORM.CHG_FLD_LOCAL_CUST_AC_NO.value;
-      } else {
-        var id = document.MAINFORM.CUST_ID.value;
-        var br_code = document.MAINFORM.ORGI_BR_CODE.value;
-        var ccy = 'INR';
-        if (document.MAINFORM.CHG_FLD_LOCAL_CUST_AC_NO.value == '') {
-          var default_acc = SYT_Get_customerAccountNumber('C', 1, 10, 100, id, ccy, br_code);
-          ChargeAccount = default_acc;
-        }
+      if (document.MAINFORM.CUST_BIC_CODE.value != "") {
+         var CustBICCode = document.MAINFORM.CUST_BIC_CODE.value;
+         var ReceivingAgentString = "";
+         var ChargeAccount = "";
+         if (document.MAINFORM.CHG_FLD_LOCAL_CUST_AC_NO.value != "") {
+            ChargeAccount = document.MAINFORM.CHG_FLD_LOCAL_CUST_AC_NO.value;
+         } else {
+            var id = document.MAINFORM.CUST_ID.value;
+            var br_code = document.MAINFORM.ORGI_BR_CODE.value;
+            var ccy = 'INR';
+            if (document.MAINFORM.CHG_FLD_LOCAL_CUST_AC_NO.value == '') {
+               var default_acc = SYT_Get_customerAccountNumber('C', 1, 10, 100, id, ccy, br_code);
+               ChargeAccount = default_acc;
+            }
+         }
+         if (ChargeAccount != "") {
+            ReceivingAgentString = "/" + ChargeAccount + "\n";
+            ReceivingAgentString += CustBICCode;
+            document.MAINFORM.MT300_RECV_AGENT.value = ReceivingAgentString;
+         }
       }
-
-      if (ChargeAccount != "") {
-        // Full SWIFT-style string (for display / SWIFT msg)
-        ReceivingAgentString = "/" + ChargeAccount + "\n" + CustBICCode;
-
-        // --- Ensure two hidden fields exist in the form:
-        // 1) MT300_RECV_AGENT_FULL  -> stores the full "/acct\nBIC" (for later use/display)
-        // 2) MT300_RECV_AGENT_NUM   -> stores digits-only account for backend numeric parsing
-        (function ensureHiddenFields() {
-          var form = document.MAINFORM;
-          if (!form) return;
-          if (!document.getElementById('MT300_RECV_AGENT_FULL')) {
-            var h1 = document.createElement('input');
-            h1.type = 'hidden';
-            h1.id = 'MT300_RECV_AGENT_FULL';
-            h1.name = 'MT300_RECV_AGENT_FULL';
-            h1.value = '';
-            form.appendChild(h1);
-          }
-          if (!document.getElementById('MT300_RECV_AGENT_NUM')) {
-            var h2 = document.createElement('input');
-            h2.type = 'hidden';
-            h2.id = 'MT300_RECV_AGENT_NUM';
-            h2.name = 'MT300_RECV_AGENT'; 
-            // IMPORTANT: set name to the same parameter Java reads.
-            // If Java reads a different parameter, change the name accordingly.
-            h2.value = '';
-            form.appendChild(h2);
-          }
-        })();
-
-        // Store the full text in MT300_RECV_AGENT_FULL for later SWIFT usage/display
-        var fullEl = document.getElementById('MT300_RECV_AGENT_FULL');
-        if (fullEl) fullEl.value = ReceivingAgentString;
-
-        // Extract digits-only from ChargeAccount (preserve leading zeros)
-        var digitsOnly = String(ChargeAccount).replace(/\D+/g, '');
-
-        // Put digits-only into the hidden field that the backend expects.
-        // NOTE: we used name='MT300_RECV_AGENT' for the hidden input above so the server receives digits-only.
-        var backendEl = document.getElementById('MT300_RECV_AGENT_NUM');
-        if (!backendEl) {
-          // In some pages the hidden was created with id same as name - try fallback
-          backendEl = document.getElementById('MT300_RECV_AGENT');
-        }
-        if (backendEl) {
-          backendEl.value = digitsOnly;
-        } else {
-          // Last fallback: if the visible field exists and server expects that, overwrite it.
-          if (document.MAINFORM.MT300_RECV_AGENT) {
-            document.MAINFORM.MT300_RECV_AGENT.value = digitsOnly;
-          }
-        }
-
-        // Keep a visible field (if exists) showing the full SWIFT string for user readability.
-        // But we have already ensured backend hidden field (name=MT300_RECV_AGENT) contains digits-only.
-        try {
-          if (document.MAINFORM.MT300_RECV_AGENT_DISPLAY) {
-            // if you have a separate display field named MT300_RECV_AGENT_DISPLAY
-            document.MAINFORM.MT300_RECV_AGENT_DISPLAY.value = ReceivingAgentString;
-          } else if (document.MAINFORM.MT300_RECV_AGENT && document.getElementById('MT300_RECV_AGENT') && document.getElementById('MT300_RECV_AGENT').type !== 'hidden') {
-            // if the MT300_RECV_AGENT field is visible (rare), don't overwrite it with digits-only UI.
-            // put full string into another visible field if you want, otherwise comment this out.
-            // document.MAINFORM.MT300_RECV_AGENT.value = ReceivingAgentString;
-          }
-        } catch (ignore) {}
-
-      } // end if ChargeAccount != ""
-    } // end if CUST_BIC_CODE
-  } catch (e) {
-    DisExcpt("SYF_FWCO_Booking_FC_DEO.js*SYF_FWCO_MT300_GenerateReceivingAgentString", e);
-  }
-};
+   } catch (e) {
+      DisExcpt("SYF_FWCO_BookingForwardContracts.js*SYF_FWCO_MT300_GenerateReceivingAgentString", e);
+   }
+}
