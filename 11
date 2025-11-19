@@ -1,28 +1,3 @@
-csFuncLevelProto.SYF_FWCO_MT300_GenerateReceivingAgentString = function() {
-   try {
+Dear Teja,
 
-      if (document.MAINFORM.CUST_BIC_CODE.value != "") {
-         var CustBICCode = document.MAINFORM.CUST_BIC_CODE.value;
-         var ReceivingAgentString = "";
-         var ChargeAccount = "";
-         if (document.MAINFORM.CHG_FLD_LOCAL_CUST_AC_NO.value != "") {
-            ChargeAccount = document.MAINFORM.CHG_FLD_LOCAL_CUST_AC_NO.value;
-         } else {
-            var id = document.MAINFORM.CUST_ID.value;
-            var br_code = document.MAINFORM.ORGI_BR_CODE.value;
-            var ccy = 'INR';
-            if (document.MAINFORM.CHG_FLD_LOCAL_CUST_AC_NO.value == '') {
-               var default_acc = SYT_Get_customerAccountNumber('C', 1, 10, 100, id, ccy, br_code);
-               ChargeAccount = default_acc;
-            }
-         }
-         if (ChargeAccount != "") {
-            ReceivingAgentString = "/" + ChargeAccount + "\n";
-            ReceivingAgentString += CustBICCode;
-            document.MAINFORM.MT300_RECV_AGENT.value = ReceivingAgentString;
-         }
-      }
-   } catch (e) {
-      DisExcpt("SYF_FWCO_BookingForwardContracts.js*SYF_FWCO_MT300_GenerateReceivingAgentString", e);
-   }
-}
+The Auto Cancelation for no need KT docmmants needed I larady to to what i know i am givin the KT for @NERELLA RAHUL if you want any thing I will tell you on KT secetion.
