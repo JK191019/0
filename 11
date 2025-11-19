@@ -32,3 +32,53 @@ note: i am working the AUTO cancilation only i alarady giving all the input i kw
 Regards,
 Jithendra Kolusu.
 
+
+
+
+Subject: Re: KT Document for CRS and Auto-Cancellation Batch Process
+
+Dear Teja,
+
+Regarding the KT document for the CRS work and the Auto-Cancellation batch process in Forward Contract, I would like to clarify that the Auto Cancellation logic is straightforward and works the same way as the old functionality.
+
+Below is the complete logic involved:
+
+1. Auto-Cancellation Batch Trigger
+
+If DUE_DT_CONTRACT < SYSDATE, then the PSO team will run the following two .sh files:
+	1.	/TFEEAPP/base_domain/Reports/SrcScripts/auto_can_normal.sh
+	2.	/TFEEAPP/base_domain/Reports/SrcScripts/auto_can_cross.sh
+
+After running these scripts, the transaction becomes available in the Merging queue.
+Once the merging is completed, the transaction will appear in the Auto Cancellation batch based on the SQL condition below.
+
+2. Auto-Cancellation SQL Condition
+
+A transaction enters the Auto-Cancellation queue if:
+
+C_TRX_STATUS = 'M'
+AND BAL_FRGN_AMT > 0
+AND CAN_FLG = '3'
+AND C_FUNC_SHORT_NAME IN 
+('Book_FC_BRU','Booking_FC_DEO','DLIVERY_BRU','DLIVERY_DEO',
+ 'FWCO_CANCEL_BRU','MANUAL_CNLDEO_TF','FWCO_FC_RFO','Sub_CE_15TF')
+AND C_FUNC_SHORT_NAME <> 'autocanTF'
+AND T_SYS_REL_TIME = TRUNC(SYSDATE)
+
+3. TASK.js
+
+I have written the required logic in TASK.js.
+Once you review the TASK.js file, the flow will be clear.
+
+Since these are the only conditions involved in Auto Cancellation, there isn’t much more content to include in a detailed KT document.
+
+I will provide the KT to @Nerella Rahul, and if you need any further clarification, I can explain everything during the KT session.
+
+Note: I am working only on Auto Cancellation. All the inputs I have for this CR have already been shared with @Nerella Rahul.
+If you need any extra clarity, I will provide it during the KT session.
+
+Kindly let me know your available timing for the KT session.
+
+Regards,
+Jithendra Kolusu
+
