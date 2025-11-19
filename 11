@@ -9,17 +9,24 @@ Dear Teja,
 Regarding the KT document for the Auto Cancellation functionality, I would like to clarify that there is very limited information to include, as the logic is straightforward.
 
 The Auto Cancellation works based on a simple condition:
-	•	If can_flag = 3 and
-	•	The balance ≥ 0,
+
+1st The DUE_DT_CONTRACT < SYASTMDATE then PSO Tema will run two .sh files the files are 
+1./TFEEAPP/base_domain/Reports/SrcScripts/auto_can_normal.sh 2./TFEEAPP/base_domain/Reports/SrcScripts/auto_can_cross.sh so then the trasaction avilabule in the Meruquring after Merqury the trasaction will avilabule in the Auto clarification Beach for the sql condiation  C_TRX_STATUS='M' AND BAL_FRGN_AMT > 0 AND CAN_FLG='3' AND C_FUNC_SHORT_NAME IN ('Book_FC_BRU','Booking_FC_DEO','DLIVERY_BRU','DLIVERY_DEO','FWCO_CANCEL_BRU','MANUAL_CNLDEO_TF','FWCO_FC_RFO','Sub_CE_15TF')AND C_FUNC_SHORT_NAME &lt;&gt; 'autocanTF'AND T_SYS_REL_TIME = TRUNC(SYSDATE) 
+
+
+and TASK js i am writing the code once you check the TASK.js will undarstabule.
+
 
 then the transaction will automatically fall under the Auto Cancellation queue.
 
 Since this is the only condition involved, there is not much detailed content to provide in the KT document.
 
-I will be giving the KT to @Nerella Rahul, and if you need any additional details or clarifications, I will be happy to explain them during the KT session.
+I will be giving the KT to @Nerella Rahul, and if you need any additional details or clarifications,
 
 Please let me know if you need anything else.
 
+note: i am working the AUTO cancilation only i alarady giving all the input i kwon the for this CR i all give to @Nerella Rahul if you have any exatar calarty i will provide in the KT session.
+
 Regards,
-[Your Name]
+Jithendra Kolusu.
 
