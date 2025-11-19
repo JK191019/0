@@ -1,3 +1,25 @@
 Dear Teja,
 
 The Auto Cancelation for no need KT docmmants needed I larady to to what i know i am givin the KT for @NERELLA RAHUL if you want any thing I will tell you on KT secetion.
+
+Subject: KT Document for Auto Cancellation Functionality
+
+Dear Teja,
+
+Regarding the KT document for the Auto Cancellation functionality, I would like to clarify that there is very limited information to include, as the logic is straightforward.
+
+The Auto Cancellation works based on a simple condition:
+	•	If can_flag = 3 and
+	•	The balance ≥ 0,
+
+then the transaction will automatically fall under the Auto Cancellation queue.
+
+Since this is the only condition involved, there is not much detailed content to provide in the KT document.
+
+I will be giving the KT to @Nerella Rahul, and if you need any additional details or clarifications, I will be happy to explain them during the KT session.
+
+Please let me know if you need anything else.
+
+Regards,
+[Your Name]
+
