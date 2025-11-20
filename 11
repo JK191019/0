@@ -82,3 +82,110 @@ Kindly let me know your available timing for the KT session.
 Regards,
 Jithendra Kolusu
 
+✅ What is a Forward Contract (FWC / FWCO) in Trade Finance?
+
+A Forward Contract (FWC) is an agreement between a customer (exporter/importer) and the bank (like SBI) to buy or sell foreign currency at a fixed rate on a future date.
+
+👉 Why?
+
+To protect the customer from foreign exchange rate fluctuations.
+
+👉 Used By:
+	•	Exporters (who will receive foreign currency later)
+	•	Importers (who need to pay foreign currency later)
+
+👉 In SBI Systems:
+	•	FWCO = Forward Contract – Outgoing / Forward Contract Booking
+	•	FWCI = Forward Contract – Incoming / Forward Utilization
+
+Some banks use slightly different codes, but SBI’s trade finance system uses FWCO for booking.
+
+⸻
+
+🎯 Example (SBI – Forward Contract Booking)
+
+Case: Importer example
+
+ABC Importers (India) need to pay USD 100,000 to a supplier after 3 months.
+
+Current USD/INR = ₹84.20
+
+But they worry the rate may go to 86 or 87.
+
+They go to SBI and book a forward contract:
+	•	Type: FWCO
+	•	Amount: USD 100,000
+	•	Tenor: 3 months (value date)
+	•	Rate fixed: ₹84.50 (Bank gives forward premium)
+
+Now the importer is protected — no matter market rate goes up, SBI must give USD at ₹84.50.
+
+⸻
+
+🎯 Example (Exporters)
+
+XYZ Exporter will receive USD 50,000 after 2 months.
+
+Market rate today: ₹84.20
+They worry USD may fall to 82 or 81 later.
+
+They book FWCO with SBI:
+	•	Amount: USD 50,000
+	•	Tenor: 2 months
+	•	Rate fixed: ₹84.30
+
+Now exporter is protected from loss.
+
+⸻
+
+🧾 How SBI Handles Forward Contracts Internally
+
+In SBI Trade Finance (and similar bank software):
+
+1️⃣ Booking (FWCO)
+	•	Customer requests contract
+	•	Bank checks limits (LC limit, FBP/FBD limit, FX exposure)
+	•	Bank fixes forward rate
+	•	Contract booked with a unique Forward Contract Number
+	•	LIEN marked on the customer’s FX limit
+	•	Accounting entries passed
+
+2️⃣ Utilization (FWCI)
+
+Whenever:
+	•	Import bill comes for payment
+	•	Export bill is purchased/realized
+
+Bank uses (utilizes) part or full of the forward contract.
+
+3️⃣ Cancellation
+
+If customer doesn’t use the contract, SBI cancels it.
+
+Cancellation requires:
+	•	Rebooking rate difference
+	•	Cancellation charge
+	•	Swap cost depending on market
+
+4️⃣ Extension / Rollover
+
+If customer needs extension, SBI rebooks with new maturity date.
+
+⸻
+
+🏦 SBI Example – How it looks in Bank System
+
+✔ Final Summary (Very Simple)
+
+Forward Contract (FWCO) = Agreement with SBI to lock a fixed foreign exchange rate for future payment/receipt to avoid loss due to rate fluctuation.
+
+⸻
+
+If you want, Boss, I can also explain:
+
+✅ Forward contract booking flow in banks
+✅ Accounting entries used in SBI trade finance
+✅ How auto-cancellation works
+✅ How margin / exposure is calculated
+✅ Difference between Option, Forward, and Swap
+
